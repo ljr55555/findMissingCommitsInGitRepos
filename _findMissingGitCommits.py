@@ -33,7 +33,7 @@ def main(argv):
 	iMailRelayPort = 25
 
 	try:
-		opts, args = getopt.getopt(argv,"hd:m:p:s:r:",["dirname=","mailrelay","port,"sender","recipients"])
+		opts, args = getopt.getopt(argv,"hd:m:p:s:r:",["dirname=","mailrelay","port","sender","recipients"])
 	except getopt.GetoptError:
 		print('Usage:\n\t_findMissingGitCommits.py -d <rootDirectoryToSearch> -m <smtpRelay> -p <smtpPort> -s <senderAddress> -r <recipientAddresses>')
 		sys.exit(2)
