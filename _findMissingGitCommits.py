@@ -61,7 +61,7 @@ def main(argv):
 
 	strReposWithMissingCommits = [];
 
-	for dirName, subdirList, fileList in os.walk(strSearchRoot):		
+	for dirName, subdirList, fileList in os.walk(strSearchRoot):
 		if dirName.endswith("/.git"):											# Linux
 			# strip .git and use that folder
 			dirToProcess = dirName[:-4]
@@ -96,6 +96,8 @@ def main(argv):
 
 
 	if len(strReposWithMissingCommits) > 0:
+		strComputerName = os.environ['COMPUTERNAME']
+
 		strMessageContent = "<table>"
 		for strRepo in strReposWithMissingCommits:
 			strMessageContent = strMessageContent + "<tr><td>" + strRepo + "</td></tr>"
@@ -106,11 +108,11 @@ def main(argv):
 		mimeMsg = MIMEMultipart()
 		mimeMsg['From'] = strSenderAddress
 		mimeMsg['To'] = strRecipientAddresses
-		mimeMsg['Subject'] = "GIT Repos With Outstanding Commits"
+		mimeMsg['Subject'] = strComputerName + ": GIT Repos With Outstanding Commits"
 		mimeMsg.attach(MIMEText(strMessageContent,'html'))
 
 		smtpServer = smtplib.SMTP(strMailRelay, iMailRelayPort)
-		#smtpServer.set_debuglevel(True)
+#		smtpServer.set_debuglevel(True)
 		smtpServer.ehlo()
 		smtpServer.starttls()
 		smtpServer.ehlo()
