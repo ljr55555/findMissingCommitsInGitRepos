@@ -17,6 +17,8 @@ strRepoError = "Invalid GIT repository"
 import sys
 import getopt
 
+ 
+import socket
 import os
 from subprocess import check_output
 
@@ -96,7 +98,7 @@ def main(argv):
 
 
 	if len(strReposWithMissingCommits) > 0:
-		strComputerName = os.environ['COMPUTERNAME']
+		strComputerName = socket.gethostname()
 
 		strMessageContent = "<table>"
 		for strRepo in strReposWithMissingCommits:
