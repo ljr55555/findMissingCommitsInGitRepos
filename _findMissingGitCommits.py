@@ -65,7 +65,6 @@ def main(argv):
 		if dirName.endswith("/.git"):											# Linux
 			# strip .git and use that folder
 			dirToProcess = dirName[:-4]
-			print('Will diff directory %s' % dirToProcess)
 			try:
 				strResults = check_output(["bash", "-c" , 'cd %s;git diff-files' %dirToProcess])
 			except:
