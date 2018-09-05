@@ -38,7 +38,9 @@ def main(argv):
 		print('Usage:\n\t_findMissingGitCommits.py -d <rootDirectoryToSearch> -m <smtpRelay> -p <smtpPort> -s <senderAddress> -r <recipientAddresses>')
 		sys.exit(2)
 
-	if len(sys.argv) > 6:
+	print("I have %s arguments" % len(sys.argv))
+
+	if len(sys.argv) < 11:
 		print('Usage:\n\t_findMissingGitCommits.py -d <rootDirectoryToSearch> -m <smtpRelay> -p <smtpPort> -s <senderAddress> -r <recipientAddresses>')
 		sys.exit(0)
 
@@ -55,7 +57,7 @@ def main(argv):
 		elif opt in ("-s", "--sender"):
 			strSenderAddress = arg
 		elif opt in ("-r", "--recipients"):
-			strRecipients = arg
+			strRecipientAddresses = arg
 
 	strReposWithMissingCommits = [];
 
