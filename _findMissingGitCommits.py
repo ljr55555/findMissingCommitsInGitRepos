@@ -12,12 +12,6 @@
 ################################################################################
 # String used when repo does not appear to be valid
 strRepoError = "Invalid GIT repository"
-strSenderAddress = "devnull@windstream.com"
-#strRecipientAddresses = "lisa.rushworth@windstream.com"
-#strMailRelay = "mail.windstream.com"
-strRecipientAddresses = "lisa@rushworth.us"
-strMailRelay = "fedora02.rushworth.us"	
-iMailRelayPort = 25
 
 # Import everything we need
 import sys
@@ -33,15 +27,19 @@ from email.mime.text import MIMEText
 def main(argv):
 
 	strSearchRoot = ''
+	strSenderAddress = ''
+	strRecipientAddresses = ''
+	strMailRelay = ''	
+	iMailRelayPort = 25
 
 	try:
-		opts, args = getopt.getopt(argv,"hd:",["dirname="])
+		opts, args = getopt.getopt(argv,"hd:m:p:s:r:",["dirname=","mailrelay","port,"sender","recipients"])
 	except getopt.GetoptError:
-		print('Usage:\n\t_findMissingGitCommits.py -d <rootDirectoryToSearch>')
+		print('Usage:\n\t_findMissingGitCommits.py -d <rootDirectoryToSearch> -m <smtpRelay> -p <smtpPort> -s <senderAddress> -r <recipientAddresses>')
 		sys.exit(2)
 
-	if len(sys.argv) == 1:
-		print('Usage:\n\t_findMissingGitCommits.py -d <rootDirectoryToSearch>')
+	if len(sys.argv) > 6:
+		print('Usage:\n\t_findMissingGitCommits.py -d <rootDirectoryToSearch> -m <smtpRelay> -p <smtpPort> -s <senderAddress> -r <recipientAddresses>')
 		sys.exit(0)
 
 	for opt, arg in opts:
@@ -50,6 +48,14 @@ def main(argv):
 			sys.exit()
 		elif opt in ("-d", "--dirname"):
 			strSearchRoot = arg
+		elif opt in ("-m", "--mailrelay"):
+			strMailRelay = arg
+		elif opt in ("-p", "--port"):
+			iMailRelayPort = arg
+		elif opt in ("-s", "--sender"):
+			strSenderAddress = arg
+		elif opt in ("-r", "--recipients"):
+			strRecipients = arg
 
 	strReposWithMissingCommits = [];
 
