@@ -16,7 +16,6 @@ strRepoError = "Invalid GIT repository"
 # Import everything we need
 import sys
 import getopt
-
  
 import socket
 import os
@@ -40,16 +39,14 @@ def main(argv):
 		print('Usage:\n\t_findMissingGitCommits.py -d <rootDirectoryToSearch> -m <smtpRelay> -p <smtpPort> -s <senderAddress> -r <recipientAddresses>')
 		sys.exit(2)
 
-	print("I have %s arguments" % len(sys.argv))
-
 	if len(sys.argv) < 11:
 		print('Usage:\n\t_findMissingGitCommits.py -d <rootDirectoryToSearch> -m <smtpRelay> -p <smtpPort> -s <senderAddress> -r <recipientAddresses>')
 		sys.exit(0)
 
 	for opt, arg in opts:
 		if opt == '-h':
-			print('Usage:\n\t_findMissingGitCommits.py -d <rootDirectoryToSearch>')
-			sys.exit()
+			print('Usage:\n\t_findMissingGitCommits.py -d <rootDirectoryToSearch> -m <smtpRelay> -p <smtpPort> -s <senderAddress> -r <recipientAddresses>')
+			sys.exit(0)
 		elif opt in ("-d", "--dirname"):
 			strSearchRoot = arg
 		elif opt in ("-m", "--mailrelay"):
